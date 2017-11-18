@@ -17,18 +17,11 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 marginbuttom">
 				<div class="col-xs-12 col-sm-12 col-md-12"><h4>Participantes</h4></div>
 			</div>	
-		
+		<!--
 			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
 				<a href="<?php echo base_url(); ?>historico_participantes" type="button" class="btn btn-success btn-block">Histórico de accesos</a>
 			</div>
-
-			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
-				<a href="<?php echo base_url(); ?>participantes_unico" type="button" class="btn btn-success btn-block">Histórico de participantes</a>
-			</div>
-
-			<div class="col-sm-3 col-md-3 marginbuttom">
-				<a id="exportar_reportes" nombre="reportes_participante" type="button" class="btn btn-success btn-block">Exportar</a>
-			</div>
+			-->
 
 			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
 				<a href="<?php echo base_url(); ?>listado_completo" type="button" class="btn btn-success btn-block">Listado completo</a>

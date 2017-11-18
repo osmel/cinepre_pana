@@ -18,17 +18,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12"><h4>Participantes</h4></div>
 			</div>	
 		
-			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
-				<a href="<?php echo base_url(); ?>historico_participantes" type="button" class="btn btn-success btn-block">Histórico de accesos</a>
-			</div>
 
-			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
-				<a href="<?php echo base_url(); ?>participantes_unico" type="button" class="btn btn-success btn-block">Histórico de participantes</a>
-			</div>
-
-			<div class="col-sm-3 col-md-3 marginbuttom">
-				<a id="exportar_reportes" nombre="exportar_listado_unico" type="button" class="btn btn-success btn-block">Exportar</a>
-			</div>
 
 
 
@@ -49,22 +39,15 @@
 								<tr>
 									<th class="text-center " width="10%"><strong>Fecha Participación</strong></th>
 									<th class="text-center cursora" width="15%">Nombre</th>
-									<th class="text-center cursora" width="10%">Nick</th>
-									<!-- <th class="text-center cursora" width="10%">Contraseña</th>  -->
-									<th class="text-center cursora" width="10%">Ticket</th>
-									
-									<!-- <th class="text-center cursora" width="10%">Monto Comprado</th>
+									<th class="text-center cursora" width="15%">F. Nacimiento</th>
+									<th class="text-center cursora" width="10%">Ciudad</th>
+									<th class="text-center cursora" width="10%">Celular</th>
 									<th class="text-center cursora" width="15%">Email </th>
-									<th class="text-center cursora" width="10%">Télefono </th> -->
-									<!-- <th class="text-center cursora" width="10%">Celular</th>					 -->				
-									<th class="text-center cursora" width="15%">Ciudad donde hizo la compra</th>
-									<!-- <th class="text-center cursora" width="10%">Calle</th>
-									<th class="text-center cursora" width="10%">Número</th>
-									<th class="text-center cursora" width="10%">Colonia</th>
-									<th class="text-center cursora" width="10%">Municipio</th> -->
-									<!-- <th class="text-center cursora" width="10%">CP</th>
-									<th class="text-center cursora" width="10%">Ciudad</th> -->
-									<th class="text-center cursora" width="10%">Detalles</th>
+									<th class="text-center cursora" width="10%">Contraseña</th>  
+
+
+
+
 								</tr>
 							</thead>
 						</table>

@@ -6,6 +6,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('admin/modelo', 'modelo'); 
+		$this->load->model('registros', 'modelo_registro'); 
 		$this->load->library(array('email')); 
 	}
 
@@ -59,6 +60,7 @@ class Main extends CI_Controller {
 				$login_check = $this->modelo->check_login($data);
 				
 				if ( $login_check != FALSE ){
+					self::configuraciones_imagenes();
 
 					$usuario_historico = $this->modelo->anadir_historico_acceso($login_check[0]);
 
@@ -84,6 +86,20 @@ class Main extends CI_Controller {
 	}	
 
 
+
+	public function configuraciones_imagenes(){
+			    $configuraciones = $this->modelo_registro->listado_imagenes();
+				if ( $configuraciones != FALSE ){
+					if (is_array($configuraciones)){
+						$this->session->set_userdata('cantimagen', count($configuraciones) ) ;	
+						foreach ($configuraciones as $configuracion) {
+							$this->session->set_userdata('i'.$configuracion->id, $configuracion->valor);
+							$this->session->set_userdata('ip'.$configuracion->id, $configuracion->puntos);
+						}
+
+					}
+				} 
+	}
 
 	
 
@@ -610,12 +626,6 @@ public function listado_participantes_unico(){
   }
 
 
-  public function procesando_participantes_unico(){
-
-    $data=$_POST;
-    $busqueda = $this->modelo->buscador_listado_completo($data);
-    echo $busqueda;
-  }   
 
 
 

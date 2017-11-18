@@ -305,7 +305,7 @@ jQuery('#tabla_listado_completo').dataTable( {
 		"processing": true,
 		"serverSide": true,
 		"ajax": {
-	            	"url" : "/procesando_participantes_unico",
+	            	"url" : "/procesando_listado_completo",
 	         		"type": "POST",
 	         		
 	     },   
@@ -333,6 +333,7 @@ jQuery('#tabla_listado_completo').dataTable( {
 				"sortDescending": ": Activando para ordenar columnas descendentes"
 			},
 		},
+
 
  
 		"columnDefs": [
@@ -347,7 +348,7 @@ jQuery('#tabla_listado_completo').dataTable( {
 
 			    	{ 
 		                "render": function ( data, type, row ) {
-		                		return row[2]+' '+row[3]; //nombre+apellidos
+		                		return row[1]+' '+row[2]; //nombre+apellidos
 		                },
 		                "targets": [1] 
 		            },
@@ -355,294 +356,55 @@ jQuery('#tabla_listado_completo').dataTable( {
 
 			    	{ 
 		                "render": function ( data, type, row ) {
-		                		return row[4]; //nick
+		                		return row[3]; //fecha nacimiento
 		                },
 		                "targets": [2] 
 		            },		           		            
 
 
-			    	// { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[10]; //nick
-		      //           },
-		      //           "targets": [3] 
-		      //       },		  
+			    
+		            { 
+		                "render": function ( data, type, row ) {
+		                		return row[4]; //ciudad
+		                },
+		                "targets": [3] //ciudad
+		            },
+
 
 		            { 
 		                "render": function ( data, type, row ) {
-		                		return row[12]; //ticket
-		                },
-		                "targets": [3] 
-		            },	
-		            	
-			    		            
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return '$'+row[18]; //monto
-		      //           },
-		      //           "targets": [7] //,2,3,4
-		      //       },		
-			    	// { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[5]; //email
-		      //           },
-		      //           "targets": [8] //,2,3,4
-		      //       },
-
-			    	// { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[6]; //telefono
-		      //           },
-		      //           "targets": [9] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[7]; //telefono
-		      //           },
-		      //           "targets": [5] //,2,3,4
-		      //       },
-			    	// { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[1]; //estado
-		      //           },
-		      //           "targets": [6] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[11]; //calle
-		      //           },
-		      //           "targets": [7] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[13]; //numero
-		      //           },
-		      //           "targets": [8] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[14]; //colonia
-		      //           },
-		      //           "targets": [9] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[15]; //municipio
-		      //           },
-		      //           "targets": [10] //,2,3,4
-		      //       },
-		      //       { 
-		      //           "render": function ( data, type, row ) {
-		      //           		return row[16]; //cp
-		      //           },
-		      //           "targets": [11] //,2,3,4
-		      //       },
-		            { 
-		                "render": function ( data, type, row ) {
-		                		return row[17]; //ciudad
-		                },
-		                "targets": [4] //,2,3,4
-		            },
-
-
- 					{
-		                "render": function ( data, type, row ) {
-
-						texto='<td>';
-							texto+='<a href="/detalle_participante/'+jQuery.base64.encode(row[0])+'" type="button"'; 
-							texto+=' class="btn btn-info btn-sm btn-block" >';
-								texto+=' <span class="glyphicon glyphicon-edit"></span>';
-							texto+=' </a>';
-						texto+='</td>';
-
-
-
-							return texto;	
-		                },
-		                "targets": 5
-		            },
-
-					{ 
-
-		                 "visible": false,
-		                "targets": [5] //6
-		            }
-		            
-		           
-		            
-		        ],
-	});	
-
-
-
-jQuery('#tabla_participantes_unicos').dataTable( {
-	
-	  "pagingType": "full_numbers",
-		 "order": [[ 3, "desc" ]], //comience ordenado por el q más punto tiene
-		"processing": true,
-		"serverSide": true,
-		"ajax": {
-	            	"url" : "/procesando_participantes_unico",
-	         		"type": "POST",
-	         		
-	     },   
-
-		"language": {  //tratamiento de lenguaje
-			"lengthMenu": "Mostrar _MENU_ registros por página",
-			"zeroRecords": "No hay registros",
-			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"infoEmpty": "No hay registros disponibles",
-			"infoFiltered": "(Mostrando _TOTAL_ de _MAX_ registros totales)",  
-			"emptyTable":     "No hay registros",
-			"infoPostFix":    "",
-			"thousands":      ",",
-			"loadingRecords": "Leyendo...",
-			"processing":     "Procesando...",
-			"search":         "Buscar:",
-			"paginate": {
-				"first":      "Primero",
-				"last":       "Último",
-				"next":       "Siguiente",
-				"previous":   "Anterior"
-			},
-			"aria": {
-				"sortAscending":  ": Activando para ordenar columnas ascendentes",
-				"sortDescending": ": Activando para ordenar columnas descendentes"
-			},
-		},
-
- 
-		"columnDefs": [
-			    	
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return row[7]; //Fecha creación
-		                },
-		                "targets": [0] 
-		            },		            
-
-
-/*
-   //
-                                      9 17=>intval($row->cantidad),
-                                      10 18=>intval($row->ptoface),
-                                      11 19=>intval($row->transaccion),
-                                      12 20=>intval($row->total_iguales),
-                                      13 21=>intval($row->total_desiguales),
-*/
-                                      
-
-// 
-					{ 
-		                "render": function ( data, type, row ) {
-		                		return row[9]- (row[10]==100); //
-		                },
-		                "targets": [1] 
-		            },
-					{ 
-		                "render": function ( data, type, row ) {
-		                		return row[11]; //
-		                },
-		                "targets": [2] 
-		            },
-					{ 
-		                "render": function ( data, type, row ) {
-		                		return row[12]+row[13]; //
-		                },
-		                "targets": [3] 
-		            },		            
-					{ 
-		                "render": function ( data, type, row ) {
-		                		return row[10]; //
+		                		return row[5]; //celular
 		                },
 		                "targets": [4] 
 		            },
 
-					{ 
+		            { 
 		                "render": function ( data, type, row ) {
-		                		return (row[12]+row[13])+row[11]+row[10];
+		                		return row[6]; //email
 		                },
 		                "targets": [5] 
 		            },
-				
-		            //
 
-
-
-			    	{ 
+		            { 
 		                "render": function ( data, type, row ) {
-		                		return row[2]+' '+row[3]; //nombre+apellidos
+		                		return row[7]; //contraseña
 		                },
 		                "targets": [6] 
 		            },
 
 
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return '@'+row[4]; //nick
-		                },
-		                "targets": [7] 
-		            },		           		            
-
-
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return row[8]; //nick
-		                },
-		                "targets": [8] 
-		            },		  
-
-
-
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return row[5]; //email
-		                },
-		                "targets": [9] //,2,3,4
-		            },
-
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return row[6]; //telefono
-		                },
-		                "targets": [10] //,2,3,4
-		            },
-			    	{ 
-		                "render": function ( data, type, row ) {
-		                		return row[1]; //estado
-		                },
-		                "targets": [11] //,2,3,4
-		            },
-
-
-
- 					{
-		                "render": function ( data, type, row ) {
-
-						texto='<td>';
-							texto+='<a href="/detalle_participante/'+jQuery.base64.encode(row[0])+'" type="button"'; 
-							texto+=' class="btn btn-info btn-sm btn-block" >';
-								texto+=' <span class="glyphicon glyphicon-edit"></span>';
-							texto+=' </a>';
-						texto+='</td>';
-
-
-
-							return texto;	
-		                },
-		                "targets": 12
-		            },
 
 					{ 
 
 		                 "visible": false,
-		                "targets": [13] //6
+		                "targets": [7,8] //6
 		            }
 		            
 		           
 		            
 		        ],
 	});	
+
 
 
 //listado de participantes
