@@ -19,6 +19,9 @@
 			</div>	
 		
 
+			<div class="col-sm-3 col-md-3 marginbuttom">
+				<a id="exportar_reportes" nombre="exportar_listado_unico" type="button" class="btn btn-success btn-block">Exportar</a>
+			</div>
 
 
 

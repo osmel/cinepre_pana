@@ -1106,9 +1106,9 @@ public function buscador_listado_completo($data){
                        )
             )";         
 
-             $where = "(  ( AES_DECRYPT(p.tarjeta,'{$this->key_hash}') <> '' ) 
+             /*$where = "(  ( AES_DECRYPT(p.tarjeta,'{$this->key_hash}') <> '' ) 
                   AND ( AES_DECRYPT(p.juego,'{$this->key_hash}') <> '' ) 
-              )" ;    
+              )" ;    */
 
   
           //$this->db->where($where);
@@ -1618,129 +1618,31 @@ public function buscador_listado_completo($data){
           
           $id_session = $this->session->userdata('id');
 
-          //$this->db->select("p.id", FALSE);           
-          $this->db->select("AES_DECRYPT(p.email,'{$this->key_hash}') AS email", FALSE);            
-          $this->db->select("AES_DECRYPT(p.nombre,'{$this->key_hash}') AS nomb", FALSE);      
-          $this->db->select("AES_DECRYPT(p.apellidos,'{$this->key_hash}') AS apellidos", FALSE);      
-          $this->db->select("AES_DECRYPT(p.nick,'{$this->key_hash}') AS nick", FALSE);  
-          $this->db->select("AES_DECRYPT(p.calle,'{$this->key_hash}') AS calle", FALSE);    
-          $this->db->select("p.numero numero", FALSE);    
-          $this->db->select("AES_DECRYPT(p.colonia,'{$this->key_hash}') AS colonia", FALSE);    
-          $this->db->select("AES_DECRYPT(p.municipio,'{$this->key_hash}') AS municipio", FALSE);   
-          $this->db->select("AES_DECRYPT(p.telefono,'{$this->key_hash}') AS telefono", FALSE);      
-          $this->db->select("AES_DECRYPT(p.contrasena,'{$this->key_hash}') AS contrasena", FALSE);
-
-          $this->db->select("AES_DECRYPT(p.cp,'{$this->key_hash}') AS cp", FALSE);
-          $this->db->select("AES_DECRYPT(p.ciudad,'{$this->key_hash}') AS cuidad", FALSE);
-          //$this->db->select("AES_DECRYPT(p.estado,'{$this->key_hash}') AS estado", FALSE);
-
-          
-          //$this->db->select("CONVERT(AES_DECRYPT(p.total,'{$this->key_hash}'),decimal) AS puntos", FALSE);
-          $this->db->select("( CASE WHEN p.fecha_pc = 0 THEN '' ELSE DATE_FORMAT(FROM_UNIXTIME(p.fecha_pc),'%d-%m-%Y %H:%i:%s') END ) AS fecha", FALSE);  
-          $this->db->select("c.nombre estado", FALSE);           
-          
-           //ticket, folio, puntos, monto, transaccion,fecha_compra, hora_ingreso
-
-          $this->db->select("AES_DECRYPT(r.ticket,'{$this->key_hash}') AS ticket", FALSE);
-          
-          //$this->db->select("AES_DECRYPT(r.puntos,'{$this->key_hash}') AS puntos", FALSE);      
-          $this->db->select("AES_DECRYPT(r.monto,'{$this->key_hash}') AS monto", FALSE);      
-          $this->db->select("AES_DECRYPT(r.transaccion,'{$this->key_hash}') AS transaccion", FALSE);      
-          $this->db->select("( CASE WHEN r.compra = 0 THEN '' ELSE DATE_FORMAT(FROM_UNIXTIME(r.compra),'%d-%m-%Y') END ) AS compra", FALSE);  
-
-
-
-///////////////////new
-
-          $this->db->select("COUNT((SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) <> 'fac-')*1) as  TICKETS_REGISTRADOS",false);
-
-          
-          $this->db->select("sum(AES_DECRYPT(r.transaccion,'{$this->key_hash}') ) AS PUNTOS_OBTENIDOS_COMPRA", FALSE);
-
-     
-
-$this->db->select("
-
-sum(
- ((
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,2,1) ) AND
-
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,3,1) )
-              AND
-              (SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) <> 'fac-')
-               AND
-              (CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) <> '000')
-
-
-  )*1 ) * (AES_DECRYPT(r.transaccion,'{$this->key_hash}') )
- )+
-
-sum(
- ((
-              NOT(( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,2,1) ) AND
-
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,3,1) ) )
-              AND
-              (SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) <> 'fac-')
-               AND
-              (CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) <> '000')
-  )*1 ) * 25
- ) PUNTOS_OBTENIDOS_JUEGO
-  ",FALSE);
-
-          $this->db->select("( CASE WHEN SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) = 'fac-' THEN 100 ELSE 0 END ) AS TOTAL_PUNTOS_FACEBOOK", FALSE);
-          
-          //$this->db->select("sum(AES_DECRYPT(r.transaccion,'{$this->key_hash}') ) AS transaccion", FALSE);
-
-
-$this->db->select("
-
-sum(
- ((
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,2,1) ) AND
-
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,3,1) )
-              AND
-              (SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) <> 'fac-')
-               AND
-              (CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) <> '000')
-
-
-  )*1 ) * (AES_DECRYPT(r.transaccion,'{$this->key_hash}') )
- )+
-
-sum(
- ((
-              NOT(( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,2,1) ) AND
-
-              ( SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,1,1) = SUBSTR(CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) ,3,1) ) )
-              AND
-              (SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) <> 'fac-')
-               AND
-              (CAST(BASE64_DECODE(AES_DECRYPT(r.puntos,'{$this->key_hash}')) AS CHAR) <> '000')
-  )*1 ) * 25
- ) +
- sum(AES_DECRYPT(r.transaccion,'{$this->key_hash}') )+
- ( CASE WHEN SUBSTR(AES_DECRYPT(r.ticket,'{$this->key_hash}'),1,4 ) = 'fac-' THEN 100 ELSE 0 END )
- as
- TOTAL_PUNTOS_ACUMULADOS
-
-  ",FALSE);
-
-          
-          $this->db->select("AES_DECRYPT(p.nick,'{$this->key_hash}') AS nick", FALSE);    
+          $this->db->select("AES_DECRYPT(p.nombre, '{$this->key_hash}') AS nombre", FALSE);
+          $this->db->select("AES_DECRYPT(Apellidos, '{$this->key_hash}') AS apellidos", FALSE);
+          $this->db->select("AES_DECRYPT(celular, '{$this->key_hash}') AS celular", FALSE);
+          $this->db->select("AES_DECRYPT(juego, '{$this->key_hash}') AS juego", FALSE);
+          $this->db->select("AES_DECRYPT(tiempo_juego, '{$this->key_hash}') AS tiempo_juego", FALSE);
+          $this->db->select("AES_DECRYPT(tarjeta, '{$this->key_hash}') AS tarjeta", FALSE);
+          $this->db->select("AES_DECRYPT(email, '{$this->key_hash}') AS email", FALSE);
+          $this->db->select("AES_DECRYPT(contrasena, '{$this->key_hash}') AS contrasena", FALSE);
+          //$this->db->select("AES_DECRYPT(puntos, '{$this->key_hash}') AS puntos", FALSE);
+          $this->db->select("redes,p.fecha_mac");
+       
+          $this->db->select("AES_DECRYPT(p.ciudad, '{$this->key_hash}') AS ciudad", FALSE);  
 
 
 ///////////////////fin new
 
 
+                          
 
 
 
 
-          $this->db->from($this->participantes.' as p');
-          $this->db->join($this->catalogo_estados.' as c', 'c.id = p.id_estado');
-          $this->db->join($this->registro_participantes.' as r', 'p.id = r.id_participante');
+
+
+             $this->db->from($this->participantes.' as p'); 
           
           
           //filtro de busqueda
@@ -1764,7 +1666,7 @@ sum(
             )";              
 
           //OR ( r.cant_botones LIKE  '%".$cadena."%' ) 
-          $this->db->where($where);
+          //$this->db->where($where);
     
           //ordenacion
           //$this->db->order_by('cant_botones', 'asc'); 
@@ -1776,6 +1678,42 @@ sum(
 
 
               if ( $result->num_rows() > 0 ) {
+
+                        foreach ($result->result() as $row) {
+
+                            $caritas = $row->juego;
+                            $c1 =  (int) ($caritas / 100);
+                            $c2 =   (int) (($caritas % 100) / 10 );
+                            $c3 =   (int) (($caritas % 10)  );
+                          $imagen1 ='<img src="'.base_url().$this->session->userdata("i".$c1).'" border="0" width="25" height="25">';
+                          $imagen2 = '<img src="'.base_url().$this->session->userdata("i".$c2).'" border="0" width="25" height="25">';
+                           $imagen3 = '<img src="'.base_url().$this->session->userdata("i".$c3).'" border="0" width="25" height="25">';
+
+                                //para sacar aciertos y suma de tiempo
+                                $matriz = explode( ";",substr($row->tarjeta, 0, -1));
+                                $suma =0;
+                                $cant=0;
+                                
+                                foreach ($matriz as $key => $value) { //3+c-0*5|00:00:01;1+a-1*12|00:00:10;2+c-0*8|00:00:0...
+                                  $ma1=explode( "+",$value);   //Array ( [0] => 3 [1] => c-0*5|00:00:01 )  -->fig 1,2,3,4,5
+                                  $ma2=explode( "-",$ma1[1]);   //Array ( [0] => c [1] => 0*5|00:00:01 )   --> resp a, b o c
+                                  $ma3=explode( "*",$ma2[1]);   //Array ( [0] => 0 [1] => 5|00:00:01 )   -->si o no
+                                  $ma4=explode( "|",$ma3[1]);   //Array ( [0] => 5 [1] => 00:00:01 )     --> id_preg
+                                  $ma5=explode( "|",$ma4[1]);
+                                  if ($ma3[0]==1) {
+                                    $cant++;
+                                  }
+                                  $suma = ($suma==0) ? (strtotime($ma5[0])) : $suma+strtotime($ma5[0]) ; 
+                                 }
+
+                                 $suma = strtotime('00:'.date("i:s", $suma));
+                                //$resto = strtotime('00:00:05');
+                                $resto = ($row->redes==1) ? strtotime('00:00:05') : strtotime('00:00:00');
+                                $suma= ($suma <=$resto ) ? 0 : $suma-$resto; 
+                                $row->tiempo_juego =date("i:s", $suma);
+                                $row->respuesta_aceptada =$cant;
+
+                          }      
                   return $result->result();
                     
               }  else {
@@ -1795,28 +1733,18 @@ $cadena = addslashes($data['busqueda']);
           
           $id_session = $this->session->userdata('id');
 
-          //$this->db->select("p.id", FALSE);           
-          $this->db->select("AES_DECRYPT(p.email,'{$this->key_hash}') AS email", FALSE);            
-          $this->db->select("AES_DECRYPT(p.nombre,'{$this->key_hash}') AS nomb", FALSE);      
-          $this->db->select("AES_DECRYPT(p.apellidos,'{$this->key_hash}') AS apellidos", FALSE);      
-          $this->db->select("AES_DECRYPT(p.nick,'{$this->key_hash}') AS nick", FALSE);  
-          $this->db->select("AES_DECRYPT(p.calle,'{$this->key_hash}') AS calle", FALSE);    
-          $this->db->select("p.numero numero", FALSE);    
-          $this->db->select("AES_DECRYPT(p.colonia,'{$this->key_hash}') AS colonia", FALSE);    
-          $this->db->select("AES_DECRYPT(p.municipio,'{$this->key_hash}') AS municipio", FALSE);   
-          $this->db->select("AES_DECRYPT(p.telefono,'{$this->key_hash}') AS telefono", FALSE);      
-          $this->db->select("AES_DECRYPT(p.contrasena,'{$this->key_hash}') AS contrasena", FALSE);
-          $this->db->select("AES_DECRYPT(r.ticket,'{$this->key_hash}') AS ticket", FALSE);
-          //$this->db->select("CONVERT(AES_DECRYPT(p.total,'{$this->key_hash}'),decimal) AS puntos", FALSE);
-          $this->db->select("( CASE WHEN p.fecha_pc = 0 THEN '' ELSE DATE_FORMAT(FROM_UNIXTIME(p.fecha_pc),'%d-%m-%Y %H:%i:%s') END ) AS fecha", FALSE);  
-          $this->db->select("c.nombre estado", FALSE);           
+          $this->db->select("p.id", FALSE);           
+           $this->db->select("AES_DECRYPT(p.nombre, '{$this->key_hash}') AS nombre", FALSE);
+          $this->db->select("AES_DECRYPT(Apellidos, '{$this->key_hash}') AS apellidos", FALSE);
+          $this->db->select("( CASE WHEN p.fecha_nac = 0 THEN '' ELSE DATE_FORMAT(FROM_UNIXTIME(p.fecha_nac),'%d-%m-%Y') END ) AS fecha_nac", FALSE);  
+          $this->db->select("AES_DECRYPT(p.ciudad, '{$this->key_hash}') AS ciudad", FALSE);
+          $this->db->select("AES_DECRYPT(celular, '{$this->key_hash}') AS celular", FALSE);
+          $this->db->select("AES_DECRYPT(email, '{$this->key_hash}') AS email", FALSE);
+          $this->db->select("AES_DECRYPT(contrasena, '{$this->key_hash}') AS contrasena", FALSE);
             
           
 
           $this->db->from($this->participantes.' as p');
-          $this->db->join($this->catalogo_estados.' as c', 'c.id = p.id_estado');
-          $this->db->join($this->registro_participantes.' as r', 'p.id = r.id_participante');
-          
           
           //filtro de busqueda
             $where = "(
@@ -1839,7 +1767,7 @@ $cadena = addslashes($data['busqueda']);
             )";              
 
   
-          $this->db->where($where);
+          //$this->db->where($where);
     
           //ordenacion
           

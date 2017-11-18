@@ -484,28 +484,28 @@ jQuery('#tabla_participantes').dataTable( {
 		                "targets": [5] 
 		            },
 				
-		            //
+		            /*
 
 			    	{ 
 		                "render": function ( data, type, row ) {
 		                			return row[11]; //puntos
 		                },
 		                "targets": [6] 
-		            },
+		            },*/
 
 
 			    	{ 
 		                "render": function ( data, type, row ) {
 		                			return row[6]; //JUEGO
 		                },
-		                "targets": [7] 
+		                "targets": [6] 
 		            },
 
 			    	{ 
 		                "render": function ( data, type, row ) {
 		                			return row[7]; //TIEMPO JUEGO
 		                },
-		                "targets": [8]  
+		                "targets": [7]  
 		            },
 
 
@@ -513,13 +513,13 @@ jQuery('#tabla_participantes').dataTable( {
 		                "render": function ( data, type, row ) {
 		                			return row[8]; //TARJETA
 		                },
-		                "targets": [9] 
+		                "targets": [8] 
 		            },
 		            { 
 		                "render": function ( data, type, row ) {
 		                			return row[14]; //TARJETA
 		                },
-		                "targets": [10] 
+		                "targets": [9] 
 		            },
 		           
 

@@ -23,6 +23,10 @@
 			</div>
 			-->
 
+			<div class="col-sm-3 col-md-3 marginbuttom">
+				<a id="exportar_reportes" nombre="reportes_participante" type="button" class="btn btn-success btn-block">Exportar</a>
+			</div>
+
 			<div class="col-xs-12 col-sm-4 col-md-3 marginbuttom">
 				<a href="<?php echo base_url(); ?>listado_completo" type="button" class="btn btn-success btn-block">Listado completo</a>
 			</div>
@@ -49,7 +53,7 @@
 									<th class="text-center cursora" width="9%">Email </th>
 									<th class="text-center cursora" width="6%">Celular</th>			
 									<th class="text-center cursora" width="8%">Estado</th>
-									<th class="text-center cursora" width="5%">puntos</th>
+									<!--<th class="text-center cursora" width="5%">puntos</th> -->
 									<th class="text-center cursora" width="10%">Juegos</th>
 									<th class="text-center cursora" width="6%">Tiempo Juego</th>
 									<th class="text-center cursora" width="6%">Respuesta acertada</th>

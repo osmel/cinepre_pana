@@ -44,7 +44,7 @@ class Exportar_reportes extends CI_Controller {
                 }    
                 
                 break; 
-    
+            /*
 
             case "exportar_participantes_unico":
                 $data['movimientos'] = $this->modelo->exportar_participantes_unico($data);
@@ -55,7 +55,7 @@ class Exportar_reportes extends CI_Controller {
                 }    
                 
                 break;        
-
+                */
 
             default:
         }
